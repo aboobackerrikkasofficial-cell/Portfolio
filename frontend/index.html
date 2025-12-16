@@ -6,13 +6,13 @@
     <title>PORTFOLIO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}">
-    <script src="{{ url_for('static', filename='js/portfolio.js') }}" defer></script>
+    <link rel="stylesheet" href="./css/portfolio.css">
+    <script src="./js/portfolio.js" defer></script>
 
 </head>
 <body>
     <div class="preloader" id="preloader">
-        <div class="loader"><img src="{{ url_for('static', filename='images/header_image.png') }}" alt="nav_image"></div>
+        <div class="loader"><img src="./images/header_image.png" alt="nav_image"></div>
     </div>
 
     <!-- navigation bar -->
@@ -64,17 +64,17 @@
                 </p>
             </div>
             <div class="buttons">
-                <button id="btn1" class="btn1" onclick="window.location.href='mailto:aboobackerrikkas16@gmail.com'">Hire Me</button>
+                <button id="btn1" class="btn1" onclick="window.location.href='mailto:aboobackerrikkasofficial@gmail.com'">Hire Me</button>
                 <button id="btn2" class="btn2"  onclick="location.href='https://wa.me/919188072646'"><span>Let's Talk</span></button>
             </div>
             <div class="icons">
-                <a href="https://instagram.com/r.ikka.x" target="_blank" rel="noopener noreferrer" title="Visit my Instagram" aria-label="Instagram Profile">
+                <a href="https://instagram.com/rikkaxx_x" target="_blank" rel="noopener noreferrer" title="Visit my Instagram" aria-label="Instagram Profile">
                     <i class="fab fa-instagram"></i>
                 </a>
                 <a href="https://www.facebook.com/aboobacker.rikkas.1" target="_blank" rel="noopener noreferrer" title="Visit my Facebook" aria-label="Facebook Profile">
                     <i id="facebook" class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://youtube.com/yourchannel" target="_blank" rel="noopener noreferrer" title="Visit my youtube" aria-label="Youtube Profile">
+                <a href="https://youtube.com/zinorashop" target="_blank" rel="noopener noreferrer" title="Visit my youtube" aria-label="Youtube Profile">
                     <i id="youtube" class="fab fa-youtube"></i>
                 </a>
                 <a href="https://tinyurl.com/nsavus2v" target="_blank" rel="noopener noreferrer" title="Visit my linkedin" aria-label="Linkedin Profile">
@@ -82,7 +82,7 @@
                 </a>
             </div>
             <div class="first-page-photo">
-                <img src="{{ url_for('static', filename='images/header_image.png') }}" alt="header_image">
+                <img src="./images/header_image.png" alt="header_image">
             </div>
         </div>
         
@@ -95,7 +95,7 @@
                 <h3 class="about-me">About <span>Me</span></h3>
         <div class="about-page">
             <div class="profile-content">
-                <img class="profile" src="{{ url_for('static', filename='images/profile_image.png') }}" alt="about_image">
+                <img class="profile" src="./images/profile_image.png" alt="about_image">
             </div>
             <div class="about-section">
                 <p class="details">I'm a passionate and dedicated Python Full Stack Developer with a strong interest in web development, 
@@ -268,7 +268,7 @@
     <!-- contact section -->
     <section class="contact" id="contact">
         <h1 class="contact-title">Contact <span>Me!</span></h1>
-            <form action="/submit" method="POST" class="contact-message">
+            <form action="https://portfolio-backend-e3qc.onrender.com/submit" method="POST" class="contact-message">
                 <div class="input-area">
                     <div class="input-wrap">
                             <input type="text" placeholder="Full Name" name="fullname" required>

@@ -21,6 +21,7 @@ html,body{
     --text-color:#ededed;
     --main-color:#00abf0;
 }
+
 /* Fullscreen Preloader */
 .preloader {
     position: fixed;

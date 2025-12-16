@@ -6,7 +6,7 @@ import os
 
 load_dotenv()
 
-app = Flask(__name__,template_folder="../frontend",static_folder="../frontend", static_url_path="")
+app = Flask(__name__)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
