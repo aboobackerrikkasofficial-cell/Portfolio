@@ -21,15 +21,11 @@ mail = Mail(app)
 def test_mail():
     msg = Message(
         subject="Test Email",
-        recipients=["yourgmail@gmail.com"],
+        recipients=["aboobackerrikkasofficial@gmail.com"],
         body="Flask Mail is working!"
     )
     mail.send(msg)
     return "Mail Sent Successfully!"
-
-@app.route('/')
-def home():
-    return render_template('portfolio.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
