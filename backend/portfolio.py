@@ -9,8 +9,8 @@ load_dotenv()
 app = Flask(__name__)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
-app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'True') == 'True'
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
@@ -19,9 +19,12 @@ mail = Mail(app)
 
 @app.route('/test-mail')
 def test_mail():
+    if not app.config['MAIL_DEFAULT_SENDER']:
+        return "MAIL_DEFAULT_SENDER not configured", 500
+    
     msg = Message(
         subject="Test Email",
-        recipients=["aboobackerrikkasofficial@gmail.com"],
+        recipients=[app.config['MAIL_DEFAULT_SENDER']],
         body="Flask Mail is working!"
     )
     mail.send(msg)
@@ -30,6 +33,9 @@ def test_mail():
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
+        if not app.config['MAIL_DEFAULT_SENDER']:
+            return "MAIL_DEFAULT_SENDER not configured", 500
+    
         data = request.form
 
         fullname = escape(data.get('fullname', ''))
