@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTFOLIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}">
+    <script src="{{ url_for('static', filename='js/portfolio.js') }}" defer></script>
+
+</head>
+<body>
+    <div class="preloader" id="preloader">
+        <div class="loader"><img src="{{ url_for('static', filename='images/header_image.png') }}" alt="nav_image"></div>
+    </div>
+
+    <!-- navigation bar -->
+    
+    <nav class="bars" >
+        <span class="menu" id="menu"  onclick="toggledown()">&#9776;</span>
+        <span class="cross" id="cross" onclick="toggledown()">&#10006;</span>
+        <h1 id="nav-name">Rikkas.</h1>
+        <div class="resume">
+           <a class="pdf" href="#" onclick="downloadCV()">Download Resume Here</a>
+        </div>
+        <div class="navigate" >
+           <a href="#home" class="active">Home</a>
+           <a href="#about">About</a>
+           <a href="#education">Education</a>
+           <a href="#skills">Skills</a>
+           <a href="#contact">Contact</a>
+        </div>
+        <div class="toggle-menu" id="toggle-menu">
+            <ul class="toggle-bar" id="toggle-bar">
+                <li class="toggle-list" ><a class="active" href="#home">Home</a></li>
+                <li class="toggle-list" ><a href="#about">About</a></li>
+                <li class="toggle-list" ><a href="#education">Education</a></li>
+                <li class="toggle-list" ><a href="#skills">Skills</a></li>
+                <li class="toggle-list" ><a href="#contact">Contact</a></li>
+            </ul>
+            <span class="nav-animate" id="nav-animate"></span>
+            <span class="nav-animate2" id="nav-animate2"></span>
+        </div>
+    </nav>
+     <!-- header for website -->
+    <section class="first-img" id="home">
+       
+        <div class="first-page">
+            
+            <h2 class="name">Hi ,i'm Aboobacker Rikkas </h2>
+            <div class="animate">
+                <span class="role">Frontend Developer</span>
+                <span class="role">Backend Developer</span>
+                <span class="role">Web Designer</span>
+                <span class="role">Meta Ads Expert</span>
+                <span class="role">Video Editor</span>
+            </div>
+            <div class="description">
+                <p class="summary">A versatile full stack developer and Meta ads expert with a strong foundation in Python,HTML,CSS,JavaScript,MySQL,
+                    jQuery,and Vue.js.Specializes in building responsive web apps,managing high-conversion Meta ad campaigns, and scaling 
+                    dropshipping businesses. Experienced in Shopify store setup,ad video editing, and digital strategies that drive real results. 
+                    Passionate about blending design,code, and marketing to build successful online ventures.
+                </p>
+            </div>
+            <div class="buttons">
+                <button id="btn1" class="btn1" onclick="window.location.href='mailto:aboobackerrikkas16@gmail.com'">Hire Me</button>
+                <button id="btn2" class="btn2"  onclick="location.href='https://wa.me/919188072646'"><span>Let's Talk</span></button>
+            </div>
+            <div class="icons">
+                <a href="https://instagram.com/r.ikka.x" target="_blank" rel="noopener noreferrer" title="Visit my Instagram" aria-label="Instagram Profile">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/aboobacker.rikkas.1" target="_blank" rel="noopener noreferrer" title="Visit my Facebook" aria-label="Facebook Profile">
+                    <i id="facebook" class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://youtube.com/yourchannel" target="_blank" rel="noopener noreferrer" title="Visit my youtube" aria-label="Youtube Profile">
+                    <i id="youtube" class="fab fa-youtube"></i>
+                </a>
+                <a href="https://tinyurl.com/nsavus2v" target="_blank" rel="noopener noreferrer" title="Visit my linkedin" aria-label="Linkedin Profile">
+                    <i id="linkedin" class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <div class="first-page-photo">
+                <img src="{{ url_for('static', filename='images/header_image.png') }}" alt="header_image">
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- About section of portfolio -->
+    
+    <section class="about" id="about">
+         
+                <h3 class="about-me">About <span>Me</span></h3>
+        <div class="about-page">
+            <div class="profile-content">
+                <img class="profile" src="{{ url_for('static', filename='images/profile_image.png') }}" alt="about_image">
+            </div>
+            <div class="about-section">
+                <p class="details">I'm a passionate and dedicated Python Full Stack Developer with a strong interest in web development, 
+                    digital marketing, and design. My technical journey began with mastering the core technologies of web development such as
+                    HTML, CSS, JavaScript, and Python, along with frameworks like jQuery and Vue.js, and database systems like MySQL. 
+                    I focus on building clean, responsive, and functional web applications that deliver real-world value.In addition to development,
+                    I have hands-on experience working with Meta Ads Manager,where I run and manage ad campaigns to help businesses grow online. 
+                    Whether it's lead generation, product marketing, or branding.I'm comfortable navigating the Meta platform to achieve specific 
+                    ad goals.I also have a beginner-level understanding of video editing and Photoshop, which allows me to create basic promotional 
+                    content, edit videos for social media, and design posters when needed. These creative skills support my technical work and give me
+                    flexibility when working on client or personal projects.
+                </p>
+                <p class="detail2">I'm currently based in <a href="">
+                    Kuniya,Kasaragod,Kerala,India</a>, where I continue to grow my skills and take on new challenges in the fields of web development and 
+                    digital marketing.
+                </p>
+            </div>
+            <div class="language">
+                <h4 class="lang">Languages</h4>
+                <hr>
+                <ul class="language-list">
+                    <li class="lang1"><span >Malayalam</span> (Native): I can fluently speak,read,write, and understand Malayalam.</li>
+                    <li class="lang1"><span >English</span> : I can read,write,understand, and communicate,though I'm not fully fluent in speaking.</li>
+                    <li class="lang1"><span >Hindi</span> : I have a beginner-level ability to speak,read,write, and understand Hindi.</li>
+                    <li class="lang1"><span >Tamil</span> : I can understand spoken Tamil and speak a little, but I cannot read or write it.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+        <!-- education section of portfolio -->
+    <section class="education-image" id="education">
+            <h3 class="educate-title">My <span>journey</span></h3>    
+        <div class="education-contents">
+            <div class="educate-descript">
+                <p id="year1">&#128197; 2017-2018</p>
+                <h5 class="rank">Secondary School Leaving Certificate(SSLC)</h5>
+                <div class="summary-descript">
+                    <p>Successfully completed the SSLC examination under the Government of Kerala in March 2018 from G.H.S.S Kuniya, Kasaragod.</p>
+                    <p>This key academic milestone reflects my strong educational foundation, demonstrated through A+ grades in Malayalam, 
+                        Arabic, and Information Technology, and A grades in English, Mathematics, Science, and Social Science. These results 
+                        showcase consistent academic performance and a balanced aptitude across languages, technology, and analytical subjects.
+                    </p>
+                    <p>Awarded Eligibility for Higher Studies, this certification laid the groundwork for my commitment to lifelong learning
+                        and personal growth, shaping the discipline, focus, dedication, and perseverance I apply to all my professional, academic, 
+                        and personal endeavors today, and motivating me to continuously strive for excellence and success.
+                    </p>
+                </div>
+            </div>
+            <div class="educate-descript2">
+                <p id="year2">&#128197; 2019-2020</p>
+                <h5 class="rank">Higher Secondary Education (Plus Two / HSSC)</h5>
+                <div class="summary-descript2">
+                    <p>I successfully completed my Higher Secondary Education (Plus Two) in the Commerce stream from G.H.S.S. Shiriya, Kerala,
+                        under the Board of Higher Secondary Examinations, Government of Kerala.</p>
+                    <p>My curriculum included Business Studies with Functional Management, Accountancy with AFS, Economics, Political Science, 
+                        English, and Arabic. Over the intensive two-year program, I gained strong and practical knowledge in financial management, 
+                        accounting standards, economic theories, and political systems.
+                    </p>
+                    <p>I achieved a total score of 688 out of 1200, with an approximate percentage of 57.33%, securing grades from A 
+                        (Excellent) to C+ (Good). These impressive results clearly show consistent academic performance, dedication, and a solid 
+                        foundation for my future studies, ambitious professional goals, and lifelong learning pursuits.
+                    </p>
+                </div>
+            </div>
+            <div class="educate-descript3">
+                <p id="year3">&#128197; 2024-2025</p>
+                <h5 class="rank">Python Full Stack Development Certification</h5>
+                <div class="summary-descript3">
+                    <p>Completed intensive Python Full Stack Web Development course at Kuniya Group of Institution, Kuniya, Kasaragod, Kerala, India,
+                        mastering modern end-to-end web app development. </p>
+                    <p id="python-task">Gained hands-on skills in:</p>
+                    <ul class="skill-box">
+                        <li id="skill-list">HTML5 & CSS3 – responsive web design</li>
+                        <li id="skill-list">JavaScript – interactive UIs</li>
+                        <li id="skill-list">jQuery – simplified DOM work</li>
+                        <li id="skill-list">Vue.js – scalable SPAs</li>
+                        <li id="skill-list">Python – server-side logic</li>
+                        <li id="skill-list">Flask – Lightweight, flexible web applications</li>
+                        <li id="skill-list">MySQL – relational database management</li>
+                    </ul>
+                    <p id="python-summary">Trained to design, develop, and deploy full-stack applications with clean, maintainable code 
+                        following best practices. Certification shows strong technical expertise and commitment to continuous learning, preparing 
+                        for professional full-stack roles.
+                    </p>
+                </div>
+            </div>
+        </div> 
+    </section>
+
+    <!-- skill section page -->
+    <section class="skills" id="skills">
+        <h1 class="my-skills">My <span>Skills</span></h1>
+        <div class="skill-list">
+            <div class="skill-items">
+                <h1 class="skill-title">Coding Skills</h1>
+                <div class="skill-row">
+                    <div class="skill-column">
+                        <div class="skill-content">
+                           <h5 class="skill-name">HTML <span>90%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div> 
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                           <h5 class="skill-name">CSS <span>78%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div> 
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                           <h5 class="skill-name">JavaScript <span>60%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div> 
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                           <h5 class="skill-name">Python <span>85%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div> 
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                           <h5 class="skill-name">MySQL <span>60%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="skill-items">
+                <h1 class="skill-title">Professional Skills</h1>
+                <div class="skill-row">
+                    <div class="skill-column">
+                        <div class="skill-content">
+                            <h5 class="skill-name">Web Development <span>90%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                            <h5 class="skill-name">Web Design <span>72%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                            <h5 class="skill-name">Meta Ads <span>95%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                            <h5 class="skill-name">Video Editing <span>68%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div>
+                    </div>
+                    <div class="skill-column">
+                        <div class="skill-content">
+                            <h5 class="skill-name">Poster Design <span>57%</span></h5>
+                            <div class="bar"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- contact section -->
+    <section class="contact" id="contact">
+        <h1 class="contact-title">Contact <span>Me!</span></h1>
+            <form action="/submit" method="POST" class="contact-message">
+                <div class="input-area">
+                    <div class="input-wrap">
+                            <input type="text" placeholder="Full Name" name="fullname" required>
+                            <span class="focus"></span>
+                    </div>
+                    <div class="input-wrap">
+                            <input type="email" placeholder="Email Address" name="email" required>
+                            <span class="focus"></span>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <div class="input-wrap">
+                            <input type="tel" placeholder="Mobile Number" name="mobile" pattern="[0-9]{10}" required>
+                            <span class="focus"></span>
+                    </div>
+                    <div class="input-wrap">
+                            <input type="text" placeholder="Email Subject" name="emailsubject" required>
+                            <span class="focus"></span>
+                    </div>
+                </div>
+                <div class="text-area">
+                    <div class="input-wrap">
+                        <textarea id="" cols="30" rows="12" placeholder="Your Message" name="message" required></textarea>
+                        <span class="focus"></span>
+                    </div>
+                </div>
+            
+                <div class="button-submit">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+    </section>
+
+    <!-- footer copyright section -->
+    <footer class="footer">
+            <div class="copyright">
+                <div class="copyright-content">
+                    <p class="copy-title">Copyright &copy; 2025 by Aboobacker Rikkas | All rights reserved.</p>
+                </div>
+                <div class="up-icon">
+                    <a href="#home" title="go upwards">
+                         <i class="fa-solid fa-angles-up"></i>
+                    </a>
+                </div>
+            </div>
+    </footer>
+    
+  
+
+</body>
+</html>
