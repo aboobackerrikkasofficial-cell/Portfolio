@@ -12,11 +12,13 @@ CORS(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
-app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'False') == 'True'
-app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'False') == 'True'
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+app.config['MAIL_TIMEOUT'] = 30
+
 
 mail = Mail(app)
 
@@ -53,7 +55,7 @@ def submit():
         user_email=data.get('email', '')
         
         if '\n' in user_email or '\r' in user_email:
-            return "Invalid emial",400
+            return "Invalid email",400
         
         msg = Message(
             subject=f" Portfolio Contact — {subject}",
@@ -155,7 +157,7 @@ def submit():
         print("Mail error:", e)
         success = False
 
-    return f"""
+    return f""", 200 if success else 500
     <html>
     <head>
         <style>
@@ -208,7 +210,7 @@ def submit():
         </div>
         <script>
             setTimeout(() => {{
-                window.location.href = '/#contact';
+                window.location.href = https://your-frontend.vercel.app/#contact';
             }}, 4000);
         </script>
     </body>
@@ -216,4 +218,4 @@ def submit():
     """
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
