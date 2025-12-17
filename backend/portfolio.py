@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request
+from flask_cors import CORS
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from markupsafe import escape
@@ -7,6 +8,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
@@ -16,6 +18,10 @@ app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 
 mail = Mail(app)
+
+@app.route('/')
+def home():
+    return "Portfolio Backend is Running ✅"
 
 @app.route('/test-mail')
 def test_mail():
@@ -209,4 +215,4 @@ def submit():
     """
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True)
