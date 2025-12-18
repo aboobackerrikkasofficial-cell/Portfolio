@@ -20,6 +20,10 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 
 mail = Mail(app)
 
+@app.route('/health')
+def health():
+    return "OK", 200
+
 @app.route('/')
 def home():
     return "Portfolio Backend is Running ✅"
@@ -37,8 +41,11 @@ def test_mail():
     mail.send(msg)
     return "Mail Sent Successfully!"
 
-@app.route('/submit', methods=['POST'])
+@app.route('/submit', methods=['GET','POST'])
 def submit():
+    if request.method == 'GET':
+        return 'Method not allowed',405
+    
     try:
         if not app.config['MAIL_DEFAULT_SENDER']:
             return "MAIL_DEFAULT_SENDER not configured", 500
@@ -208,7 +215,7 @@ def submit():
         </div>
         <script>
             setTimeout(() => {{
-                window.location.href = '/#contact';
+                window.location.href = 'https://cube-assignment-six.vercel.app/#contact';
             }}, 4000);
         </script>
     </body>
