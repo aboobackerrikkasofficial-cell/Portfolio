@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
@@ -164,7 +164,7 @@ def submit():
         print("Mail error:", e)
         success = False
 
-    return f""", 200 if success else 500
+    return f"""
     <html>
     <head>
         <style>
@@ -217,12 +217,15 @@ def submit():
         </div>
         <script>
             setTimeout(() => {{
-                window.location.href = https://your-frontend.vercel.app/#contact';
+                window.location.href = "https://your-frontend.vercel.app/#contact";
             }}, 4000);
         </script>
     </body>
     </html>
     """
+
+    
+    return html, 200 if success else 500
 
 if __name__ == '__main__':
     app.run()
