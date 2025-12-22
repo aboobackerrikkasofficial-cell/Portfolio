@@ -191,7 +191,7 @@ def submit():
         </div>
         <script>
             setTimeout(() => {{
-                window.location.href = "https://your-frontend.vercel.app/#contact";
+                window.location.href = "https://portfolio-ivory-kappa-61.vercel.app";
             }}, 4000);
         </script>
     </body>
