@@ -902,10 +902,7 @@ hr{
     text-align:start;
    }
    .language .lang{
-    display: flex;
     font-size: 22px;
-    justify-content: start;
-    text-align: center;
     left: 0;
     right: 0;
     padding: 0 0 10px 0;
