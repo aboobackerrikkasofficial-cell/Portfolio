@@ -870,7 +870,6 @@ hr{
     width: 100%;
     padding: 20px;
     padding-bottom: 60px;
-    position: relative;
    }
    hr{
     display: none;
@@ -902,6 +901,7 @@ hr{
     text-align:start;
    }
    .language .lang{
+    position: relative;
     font-size: 22px;
     left: 0;
     right: 0;
