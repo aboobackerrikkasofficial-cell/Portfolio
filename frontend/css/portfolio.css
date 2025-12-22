@@ -905,6 +905,7 @@ hr{
     font-size: 22px;
     justify-content: start;
     text-align: center;
+    margin: 0 auto;
     padding: 0 0 10px 0;
    }
    .language .language-list{
