@@ -11,14 +11,13 @@ app = Flask(__name__)
 CORS(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
-app.config['MAIL_TIMEOUT'] = 30
-
+app.config['MAIL_TIMEOUT'] = 10
 
 mail = Mail(app)
 
@@ -43,15 +42,11 @@ def test_mail():
     mail.send(msg)
     return "Mail Sent Successfully!"
 
-@app.route('/submit', methods=['GET','POST'])
+@app.route('/submit', methods=['POST'])
 def submit():
-    if request.method == 'GET':
-        return 'Method not allowed',405
     
     try:
-        if not app.config['MAIL_DEFAULT_SENDER']:
-            return "MAIL_DEFAULT_SENDER not configured", 500
-    
+        
         data = request.form
 
         fullname = escape(data.get('fullname', ''))
@@ -164,6 +159,8 @@ def submit():
         print("Mail error:", e)
         success = False
 
+    status_code= 200 if success else 500
+
     return f"""
     <html>
     <head>
@@ -222,10 +219,7 @@ def submit():
         </script>
     </body>
     </html>
-    """
-
-    
-    return html, 200 if success else 500
+    """,status_code
 
 if __name__ == '__main__':
     app.run()
