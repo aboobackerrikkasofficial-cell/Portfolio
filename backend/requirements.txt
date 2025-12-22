@@ -1,5 +1,0 @@
-flask
-flask-mail
-python-dotenv
-gunicorn
-flask-cors

@@ -1,5 +1,6 @@
+resend
 flask
-flask-mail
-python-dotenv
-gunicorn
 flask-cors
+python-dotenv
+markupsafe
+gunicorn

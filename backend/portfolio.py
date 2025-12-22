@@ -1,25 +1,17 @@
 from flask import Flask, request
 from flask_cors import CORS
-from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from markupsafe import escape
-import os
+import os,resend
 
 load_dotenv()
+resend.api_key = os.getenv("RESEND_API_KEY")
+
+if not resend.api_key:
+    raise RuntimeError("RESEND_API_KEY not set")
 
 app = Flask(__name__)
 CORS(app)
-
-app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
-app.config['MAIL_TIMEOUT'] = 10
-
-mail = Mail(app)
 
 @app.route('/health')
 def health():
@@ -28,19 +20,6 @@ def health():
 @app.route('/')
 def home():
     return "Portfolio Backend is Running ✅"
-
-@app.route('/test-mail')
-def test_mail():
-    if not app.config['MAIL_DEFAULT_SENDER']:
-        return "MAIL_DEFAULT_SENDER not configured", 500
-    
-    msg = Message(
-        subject="Test Email",
-        recipients=[app.config['MAIL_DEFAULT_SENDER']],
-        body="Flask Mail is working!"
-    )
-    mail.send(msg)
-    return "Mail Sent Successfully!"
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -54,17 +33,11 @@ def submit():
         mobile = escape(data.get('mobile', ''))
         subject = escape(data.get('emailsubject', ''))
         message = escape(data.get('message', ''))
-        user_email=data.get('email', '')
         
-        if '\n' in user_email or '\r' in user_email:
+        if '\n' in email or '\r' in email:
             return "Invalid email",400
         
-        msg = Message(
-            subject=f" Portfolio Contact — {subject}",
-            recipients=[app.config['MAIL_DEFAULT_SENDER']],
-            reply_to=user_email
-        )
-        msg.html = f"""
+        html_content = f"""
         <!DOCTYPE html>
         <html>
         <head>
@@ -151,15 +124,19 @@ def submit():
         </body>
         </html>
         """
+        resend.Emails.send({
+            "from": "Portfolio <onboarding@resend.dev>",
+            "to": ["aboobackerrikkasofficial@gmail.com"],
+            "reply_to": email,
+            "subject": f"Portfolio Contact — {subject}",
+            "html": html_content
+        })
 
-        mail.send(msg)
         success = True
 
     except Exception as e:
         print("Mail error:", e)
         success = False
-
-    status_code= 200 if success else 500
 
     return f"""
     <html>
@@ -219,7 +196,7 @@ def submit():
         </script>
     </body>
     </html>
-    """,status_code
+    """,200 if success else 500
 
 if __name__ == '__main__':
     app.run()
