@@ -896,6 +896,7 @@ hr{
     text-align:start;
    }
    .language{
+    position: relative;
     padding: 20px;
     border-radius: 0 0 10px 10px;
     text-align:start;
@@ -905,7 +906,8 @@ hr{
     font-size: 22px;
     justify-content: start;
     text-align: center;
-    margin: 0 auto;
+    left: 0;
+    right: 0;
     padding: 0 0 10px 0;
    }
    .language .language-list{
