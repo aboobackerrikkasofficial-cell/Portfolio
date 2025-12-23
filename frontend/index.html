@@ -297,7 +297,7 @@
                 </div>
             
                 <div class="button-submit">
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="submitBtn">Submit</button>
                 </div>
             </form>
     </section>
@@ -317,6 +317,11 @@
     </footer>
     
   
+<script>
+  fetch("https://portfolio-backend-e3qc.onrender.com/health")
+    .then(() => console.log("Backend awake"))
+    .catch(() => console.log("Waking backend..."));
+</script>
 
 </body>
 </html>

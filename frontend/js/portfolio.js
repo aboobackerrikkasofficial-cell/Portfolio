@@ -129,6 +129,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.addEventListener("scroll", activateNavLink);
+
+  const form=document.querySelector("form");
+  const btn=document.getElementById("submitBtn");
+
+  if (form && btn){
+    form.addEventListener("submit", () =>{
+      btn.disabled=true;
+      btn.innerText="Sending...";
+    })
+  }
 });
 
 

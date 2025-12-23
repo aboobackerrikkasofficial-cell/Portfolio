@@ -21,8 +21,11 @@ def health():
 def home():
     return "Portfolio Backend is Running ✅"
 
-@app.route('/submit', methods=['POST'])
+@app.route('/submit', methods=['GET','POST'])
 def submit():
+    
+    if request.method == 'GET':
+        return "Warming up…", 200
     
     try:
         
