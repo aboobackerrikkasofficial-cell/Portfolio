@@ -381,7 +381,7 @@ html,body{
     background-color:var(--main-color);
     top: 0;
     left:0;
-    width: 0;
+    width: 0%;
     height: 100%;
     position: absolute;
     transition: width ease 0.5s;
