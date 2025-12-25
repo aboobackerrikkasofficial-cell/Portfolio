@@ -373,21 +373,22 @@ html,body{
     position: relative;
     transition: 0.5s;
     overflow: hidden;
+    background: transparent;
+    color: white;
     font-weight: 600;
 }
 .buttons #btn2::before{
     content: " ";
     z-index: 0;
     background-color:var(--main-color);
-    top: 0;
-    left:0;
-    width: 0%;
-    height: 100%;
+    inset: 0;
+    transform: scaleX(0);
+    transform-origin: left;
     position: absolute;
-    transition: width ease 0.5s;
+    transition: transform 0.5s ease;
 }
 #btn2:hover::before{
-    width: 100%;
+    transform: scaleX(1);
 }
 #btn2:hover{
     color: black;
