@@ -7,7 +7,7 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: 'Poppins',sans-serif;
-    transition: 0.5s;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 html,body{
     height: 100%;
@@ -376,6 +376,7 @@ html,body{
     background: transparent;
     color: white;
     font-weight: 600;
+    z-index: 0;
 }
 .buttons #btn2::before{
     content: " ";
@@ -385,6 +386,7 @@ html,body{
     transform-origin: left;
     position: absolute;
     transition: transform 0.5s ease;
+    z-index: -1;
 }
 #btn2:hover::before{
     transform: scaleX(1);
