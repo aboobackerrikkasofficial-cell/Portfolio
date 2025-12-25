@@ -379,7 +379,7 @@ html,body{
 }
 .buttons #btn2::before{
     content: " ";
-    z-index: 0;
+    z-index: 1;
     background-color:var(--main-color);
     inset: 0;
     transform: scaleX(0);
