@@ -378,7 +378,7 @@ html,body{
     font-weight: 600;
     z-index: 0;
 }
-.buttons #btn2::before{
+.buttons #btn2::after{
     content: " ";
     background-color:var(--main-color);
     inset: 0;
@@ -388,13 +388,13 @@ html,body{
     transition: transform 0.5s ease;
     z-index: -1;
 }
-#btn2:hover::before{
+.buttons #btn2:hover::after{
     transform: scaleX(1);
 }
-#btn2:hover{
+.buttons #btn2:hover{
     color: black;
 }
-#btn2 span{
+.buttons #btn2 span{
     position: relative;
     z-index: 1;
 }
