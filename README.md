@@ -1,3 +1,7 @@
+## Live Demo
+Frontend (Vercel): https://portfolio-ivory-kappa-61.vercel.app  
+Backend (Render): https://portfolio-backend-e3qc.onrender.com
+
 # Portfolio Website
 
 This is my personal portfolio website showcasing my projects, skills, and experience in web development.
