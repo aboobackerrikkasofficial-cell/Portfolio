@@ -268,7 +268,7 @@
     <!-- contact section -->
     <section class="contact" id="contact">
         <h1 class="contact-title">Contact <span>Me!</span></h1>
-            <form action="https://portfolio-backend-e3qc.onrender.com/submit" method="POST" class="contact-message">
+            <form action="/submit" method="POST" class="contact-message">
                 <div class="input-area">
                     <div class="input-wrap">
                             <input type="text" placeholder="Full Name" name="fullname" required>
@@ -318,7 +318,7 @@
     
   
 <script>
-  fetch("https://portfolio-backend-e3qc.onrender.com/health")
+  fetch("/health")
     .then(() => console.log("Backend awake"))
     .catch(() => console.log("Waking backend..."));
 </script>

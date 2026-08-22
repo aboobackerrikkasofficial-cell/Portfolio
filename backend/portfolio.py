@@ -1,8 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 from markupsafe import escape
-import os,resend
+import os, resend
 
 load_dotenv()
 resend.api_key = os.getenv("RESEND_API_KEY")
@@ -10,7 +10,9 @@ resend.api_key = os.getenv("RESEND_API_KEY")
 if not resend.api_key:
     raise RuntimeError("RESEND_API_KEY not set")
 
-app = Flask(__name__)
+# Serve frontend static files
+FRONTEND_DIR = os.path.join(os.path.dirname(__file__), '..', 'frontend')
+app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path='')
 CORS(app)
 
 @app.route('/health')
@@ -19,16 +21,19 @@ def health():
 
 @app.route('/')
 def home():
-    return "Portfolio Backend is Running ✅"
+    return send_from_directory(FRONTEND_DIR, 'index.html')
 
-@app.route('/submit', methods=['GET','POST'])
+@app.route('/submit', methods=['GET', 'POST'])
 def submit():
-    
+
     if request.method == 'GET':
         return "Warming up…", 200
-    
+
+    deployment_hostname = os.getenv("DEPLOYMENT_HOSTNAME", "")
+    redirect_url = f"https://{deployment_hostname}" if deployment_hostname else "/"
+
     try:
-        
+
         data = request.form
 
         fullname = escape(data.get('fullname', ''))
@@ -36,10 +41,10 @@ def submit():
         mobile = escape(data.get('mobile', ''))
         subject = escape(data.get('emailsubject', ''))
         message = escape(data.get('message', ''))
-        
+
         if '\n' in email or '\r' in email:
-            return "Invalid email",400
-        
+            return "Invalid email", 400
+
         html_content = f"""
         <!DOCTYPE html>
         <html>
@@ -66,7 +71,7 @@ def submit():
                     margin-bottom: 20px;
                 }}
                 .row {{
-                    
+
                 }}
                 .label {{
                     color: #888;
@@ -194,12 +199,13 @@ def submit():
         </div>
         <script>
             setTimeout(() => {{
-                window.location.href = "https://portfolio-ivory-kappa-61.vercel.app";
+                window.location.href = "{redirect_url}";
             }}, 4000);
         </script>
     </body>
     </html>
-    """,200 if success else 500
+    """, 200 if success else 500
+
 
 if __name__ == '__main__':
     app.run()
