@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aboobackerrikkasofficial-cell.github.io/Portfolio/sitemap.xml
+Sitemap: https://portfolio-ivory-kappa-61.vercel.app/sitemap.xml
