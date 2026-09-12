@@ -1,148 +1,120 @@
-function toggledown() {
-  const drop = document.getElementById("toggle-menu");
-  const animate1 = document.getElementById("nav-animate");
-  const animate2 = document.getElementById("nav-animate2");
-  const menu = document.getElementById("menu");
-  const cross = document.getElementById("cross");
+/* ==========================================================================
+   Portfolio — JavaScript
+   Hamburger menu, smooth-scroll nav, hero entrance animation, active-link
+   highlighting via IntersectionObserver, form submit UX, resume download.
+   ========================================================================== */
 
-  drop.classList.toggle("active");
+document.addEventListener('DOMContentLoaded', () => {
 
-  const isOpen = drop.classList.contains("active");
+  /* ── Element references ──────────────────────────────────────────────── */
+  const hamburger   = document.getElementById('hamburger');
+  const mobileNav   = document.getElementById('mobile-nav');
+  const hero        = document.querySelector('.hero');
+  const form        = document.getElementById('contact-form');
+  const submitBtn   = document.getElementById('submitBtn');
+  const resumeBtn   = document.getElementById('resume-btn');
+  const resumeBtnM  = document.getElementById('resume-btn-mobile');
+  const navLinks    = document.querySelectorAll('.nav__links a:not(.nav__resume)');
+  const mobileLinks = document.querySelectorAll('.nav__mobile a:not(.nav__resume)');
+  const allNavLinks = [...navLinks, ...mobileLinks];
+  const sections    = document.querySelectorAll('section[id]');
 
-  menu.style.display = isOpen ? "none" : "block";
-  cross.style.display = isOpen ? "block" : "none";
+  /* ── Hamburger toggle ────────────────────────────────────────────────── */
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
 
-  animate1.style.display = isOpen ? "block" : "none";
-  animate2.style.display = isOpen ? "block" : "none";
-
-  if (isOpen) {
-    cross.style.animation = "shake .2s ease-in-out forwards";
-    menu.style.animation = "none";
-  } else {
-    menu.style.animation = "shake .2s ease-in-out forwards";
-    cross.style.animation = "none";
+    // Close mobile nav when a link is tapped
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
   }
-}
 
-
-function hidemenu() {
-  const drop = document.getElementById("toggle-menu");
-  const cross = document.getElementById("cross");
-  const menu = document.getElementById("menu");
-  const animate1 = document.getElementById("nav-animate");
-  const animate2 = document.getElementById("nav-animate2");
-
-  drop.classList.remove("active");
-
-  cross.style.display = "none";
-  menu.style.display = "block";
-
-  animate1.style.display = "none";
-  animate2.style.display = "none";
-
-  cross.style.animation = "none";
-  menu.style.animation = "none";
-}
-
-
-document.addEventListener("DOMContentLoaded",function(){
-document.querySelectorAll('.toggle-list a').forEach(link =>{
-    link.addEventListener('click',hidemenu);
-});
-});
-
-function activating(event){
-    document.querySelectorAll(".navigate a").forEach(link=>{
-        link.classList.remove('active');
-    });
-    event.currentTarget.classList.add('active');
-}
-
-document.addEventListener("DOMContentLoaded", function (){
-document.querySelectorAll('.navigate a').forEach(link=>{
-    link.addEventListener('click',activating);
-});
-});
-
-function activating1(event){
-    document.querySelectorAll(".toggle-bar a").forEach(link=>{
-        link.classList.remove('active');
-    });
-    event.currentTarget.classList.add('active');
-}
-
-document.addEventListener("DOMContentLoaded", function (){
-document.querySelectorAll('.toggle-bar a').forEach(link=>{
-    link.addEventListener('click',activating1);
-});
-});
-
-document.addEventListener("DOMContentLoaded",function(){
-    const link=document.querySelector(".navigate a");
-    if(link){
-    link.addEventListener('click',pageanimate);
-    }
-});
-
-window.addEventListener("load",function(){
-    const preloader=document.getElementById("preloader");
-
-    const loader=document.querySelector(".loader");
-
-    loader.addEventListener("animationend",function(e){
-        if (e.animationName=="fill"){
-            preloader.style.opacity="0";
+  /* ── Smooth scroll on nav click ──────────────────────────────────────── */
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
-    })
-
-        setTimeout(()=>{
-            preloader.style.display="none";
-        },5000);
-    });
-
-function downloadCV() {
-  window.open("/images/OwnResume.pdf", "_blank");
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".navigate a");
-
-  function activateNavLink() {
-    let scrollY = window.scrollY;
-
-    sections.forEach((section) => {
-      const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - 100;
-      const sectionId = section.getAttribute("id");
-
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("active");
-          }
-        });
-
+        // Update active state immediately
+        allNavLinks.forEach(l => l.classList.remove('active'));
+        // Activate both desktop and mobile links for this section
+        allNavLinks.filter(l => l.getAttribute('href') === href)
+          .forEach(l => l.classList.add('active'));
       }
     });
+  });
+
+  /* ── Active nav highlighting (IntersectionObserver) ──────────────────── */
+  if (sections.length > 0 && 'IntersectionObserver' in window) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -55% 0px', // fires when section is roughly in the top-middle
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          allNavLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
   }
 
-  window.addEventListener("scroll", activateNavLink);
-
-  const form=document.querySelector("form");
-  const btn=document.getElementById("submitBtn");
-
-  if (form && btn){
-    form.addEventListener("submit", () =>{
-      btn.disabled=true;
-      btn.innerText="Sending...";
-    })
+  /* ── Hero entrance animation ─────────────────────────────────────────── */
+  if (hero) {
+    // Respect prefers-reduced-motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      // Show everything immediately
+      hero.querySelector('.hero__content').style.opacity = '1';
+      hero.querySelector('.hero__content').style.transform = 'none';
+      const frame = hero.querySelector('.hero__photo-frame');
+      if (frame) {
+        frame.style.opacity = '1';
+        frame.style.transform = 'none';
+      }
+    } else {
+      // Trigger the CSS stagger animation
+      requestAnimationFrame(() => {
+        hero.classList.add('loaded');
+      });
+    }
   }
+
+  /* ── Form submit UX ──────────────────────────────────────────────────── */
+  if (form && submitBtn) {
+    form.addEventListener('submit', () => {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+    });
+  }
+
+  /* ── Resume download ─────────────────────────────────────────────────── */
+  function downloadCV(e) {
+    e.preventDefault();
+    window.open('./images/OwnResume.pdf', '_blank');
+  }
+
+  if (resumeBtn)  resumeBtn.addEventListener('click', downloadCV);
+  if (resumeBtnM) resumeBtnM.addEventListener('click', downloadCV);
+
 });
-
-
-
-
-
-
